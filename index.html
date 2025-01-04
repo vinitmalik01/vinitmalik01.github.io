@@ -1,1 +1,157 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'monospacezz', sans-serif;
+            margin: 0;
+            padding: 0;
+            
+            box-sizing: border-box;
+        }
+        body {
+            background-color: rgb(0, 0, 0);
+            background-size: cover;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .content {
+            
+            background-color: rgba(0, 0, 0, 0.7); /* Dark overlay for better readability */
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #00ff00;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            color: red;
+            font-size: 32px;
+        }
+        header p {
+            color: #00ff00;
+            font-size: 18px;
+        }
+        .terminal {
+            font-family: monospace;
+            border: 2px solid #00ff00;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #00ff00;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            height: 450px;
+            overflow-y: auto;
+            border-radius: 5px;
+        }
+        .terminal .heading {
+            color: rgb(235, 217, 60);
+            font-weight: bold;
+        }
+        .links-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .links-section h2 {
+            color: red;
+            margin-bottom: 10px;
+        }
+        .items a {
+            display: inline-block;
+            color: #00ff00;
+            text-decoration: none;
+            margin: 10px 15px;
+            padding: 10px 15px;
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .items a:hover {
+            color: #ff00ff;
+            border-color: #ff00ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <header>
+            <h1>Welcome to My Blog</h1>
+            <p>
+                A space where Thoughts, innovation, and strength come together to define myself.
+            </p>
+        </header>
+
+        <div class="terminal" id="terminal">
+            <span id="cursor">|</span>
+        </div>
+
+        <section class="links-section">
+            <h2>Explore the Realms</h2>
+            <div class="items">
+                <a href="Philosophy.html">Philosophy</a>
+                <a href="./Technology.html">Technology</a>
+                <a href="./gym.html">Gym</a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const terminal = document.getElementById('terminal');
+        const cursor = document.getElementById('cursor');
+        const text = [
+            "<span class='heading'>Initializing Personal Blog Terminal...</span>",
+            ">>> System Check: [OK]",
+            "<span class='heading'>Loading thoughts on Philosophy...</span>",
+            ">>> Philosophy is the art of asking questions and exploring the infinite.",
+            "<span class='heading'>Loading insights into Technology...</span>",
+            ">>> Technology bridges dreams with reality—one line of code at a time.",
+            "<span class='heading'>Loading strength stories from the Gym...</span>",
+            ">>> Strength is built not just with weights but with persistence and grit.",
+            "",
+            "<span class='heading'>Welcome to my digital sanctuary!</span>",
+            ">>> Explore the links below to dive into each realm."
+        ];
+        let line = 0;
+        let charIndex = 0;
+
+        function typeEffect() {
+            if (line < text.length) {
+                if (charIndex < text[line].length) {
+                    const currentLine = text[line];
+                    if (currentLine.startsWith("<span")) {
+                        // For headings, add the whole line instantly
+                        terminal.innerHTML += currentLine + "<br>";
+                        charIndex = currentLine.length;
+                    } else {
+                        terminal.innerHTML += text[line].charAt(charIndex);
+                        charIndex++;
+                    }
+                } else {
+                    terminal.innerHTML += "<br>";
+                    charIndex = 0;
+                    line++;
+                }
+            } else {
+                cursor.style.display = 'none'; // Hide the cursor when done
+                clearInterval(typingInterval);
+            }
+        }
+
+        // Cursor blink effect
+        setInterval(() => {
+            cursor.style.visibility = cursor.style.visibility === 'hidden' ? 'visible' : 'hidden';
+        }, 500);
+
+        // Start typing effect
+        const typingInterval = setInterval(typeEffect, 100);
+    </script>
+</body>
+</html>
