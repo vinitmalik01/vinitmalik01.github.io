@@ -3,133 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vinit's Digital Paradise</title>
+    <title>Vinit's Digital Space</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
-            font-family: 'monospacezz', sans-serif;
             margin: 0;
             padding: 0;
-            
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
         body {
-            background-color: rgb(0, 0, 0);
-            background-size: cover;
-            padding: 20px;
-            line-height: 1.6;
-        }
-        .content {
-            
-            background-color: rgba(0, 0, 0, 0.7); /* Dark overlay for better readability */
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 800px;
-            margin: 0 auto;
-            color: #00ff00;
+            background-color: #121212;
+            color: #e0e0e0;
+            line-height: 1.8;
+            padding: 0;
+            font-size: 18px;
         }
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-top: 50px;
+            margin-bottom: 40px;
         }
         header h1 {
-            color: red;
-            font-size: 32px;
+            color: #ff9e00;
+            font-size: 50px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.6);
         }
         header p {
-            color: #00ff00;
-            font-size: 18px;
+            font-size: 22px;
+            color: #c9c9c9;
+            font-weight: 300;
+            margin-top: 10px;
         }
         .terminal {
-            font-family: monospace;
-            border: 2px solid #00ff00;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: #00ff00;
-            padding: 15px;
-            margin: 20px auto;
-            max-width: 600px;
-            height: 450px;
+            background: linear-gradient(135deg, #1f2a44, #24293c);
+            color: #66fcf1;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            max-height: 450px;
             overflow-y: auto;
-            border-radius: 5px;
+            font-family: monospace;
+            font-size: 20px;
+            line-height: 1.6;
+            border: 2px solid #00d2ff;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
         }
         .terminal .heading {
-            color: rgb(235, 217, 60);
+            color: #f4d03f;
             font-weight: bold;
         }
-        .links-section {
-            text-align: center;
-            margin-top: 30px;
+        .hidden {
+            display: none;
         }
-        .links-section h2 {
-            color: red;
-            margin-bottom: 10px;
+        .skip-button {
+            background: linear-gradient(135deg, #ff5733, #c04e30);
+            color: #fff;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 20px;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
-        .items a {
-            display: inline-block;
-            color: #00ff00;
+        .skip-button:hover {
+            background: linear-gradient(135deg, #c04e30, #ff5733);
+            transform: scale(1.1);
+        }
+        .blog-post {
+            background-color: #1c1e2f;
+            margin-bottom: 40px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+        .blog-post h2 {
+            color: #ff9e00;
+            margin-bottom: 15px;
+            font-size: 28px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+        .blog-post p {
+            margin-bottom: 20px;
+            color: #d1d1d1;
+        }
+        .blog-post a {
+            color: #00d2ff;
             text-decoration: none;
-            margin: 10px 15px;
-            padding: 10px 15px;
-            border: 1px solid #00ff00;
-            border-radius: 5px;
-            transition: 0.3s;
+            font-weight: bold;
+            transition: color 0.3s, transform 0.2s ease;
         }
-        .items a:hover {
-            color: #ff00ff;
-            border-color: #ff00ff;
+        .blog-post a:hover {
+            color: #ff5733;
+            transform: translateY(-3px);
+        }
+        footer {
+            text-align: center;
+            margin-top: 70px;
+            color: #c9c9c9;
+        }
+        footer a {
+            color: #00d2ff;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: #ff5733;
         }
     </style>
 </head>
 <body>
-    <div class="content">
-        <header>
-            <h1>Welcome to My Paradise</h1>
-            <p>
-                A space where Thoughts, innovation, and strength come together to define myself.
-            </p>
-        </header>
+    <header>
+        <h1>Vinit's Digital Space</h1>
+        <p>A journey through Philosophy, Technology, and Strength</p>
+    </header>
 
-        <div class="terminal" id="terminal">
-            <span id="cursor">|</span>
+    <div class="terminal" id="terminal">
+        <span id="cursor">|</span>
+    </div>
+
+    <!-- Skip button -->
+    <button class="skip-button" id="skipButton">Skip</button>
+
+    <div id="content" class="hidden">
+        <div class="blog-post">
+            <h2>Philosophy</h2>
+            <p>Philosophy is the art of asking questions and exploring the infinite. It provides a framework to understand existence, truth, and the meaning of life.</p>
+            <a href="Philosophy.html">Read More &raquo;</a>
         </div>
 
-        <section class="links-section">
-            <h2>Explore the Realms</h2>
-            <div class="items">
-                <a href="Philosophy.html">Philosophy</a>
-                <a href="./Technology.html">Technology</a>
-                <a href="./gym.html">Gym</a>
-            </div>
-        </section>
+        <div class="blog-post">
+            <h2>Technology</h2>
+            <p>Technology bridges dreams with reality—one line of code at a time. It shapes the way we interact, innovate, and think.</p>
+            <a href="Technology.html">Read More &raquo;</a>
+        </div>
+
+        <div class="blog-post">
+            <h2>Gym & Strength</h2>
+            <p>Strength is built not just with weights but with persistence and grit. Every drop of sweat adds to the story of resilience.</p>
+            <a href="gym.html">Read More &raquo;</a>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 vinitmalik01</p>
+        </footer>
     </div>
 
     <script>
         const terminal = document.getElementById('terminal');
         const cursor = document.getElementById('cursor');
+        const content = document.getElementById('content');
+        const skipButton = document.getElementById('skipButton');
         const text = [
-            "<span class='heading'>Initializing Personal Paradise Terminal...</span>",
+            "<span class='heading'>Initializing  Terminal...</span>",
             ">>> System Check: [OK]",
-            ">>> I'm a human / hacker / coder / philosopher / lifter.",
-            ">>> Here, I welcome you to my life.",
-            "<span class='heading'>Loading thoughts on Philosophy...</span>",
-            ">>> Philosophy is the art of asking questions and exploring the infinite.",
-            "<span class='heading'>Loading insights into Technology...</span>",
-            ">>> Technology bridges dreams with reality—one line of code at a time.",
-            "<span class='heading'>Loading strength stories from the Gym...</span>",
-            ">>> Strength is built not just with weights but with persistence and grit.",
-            "",
-            "<span class='heading'>Welcome to my digital sanctuary!</span>",
-            ">>> Explore the links below to dive into each realm."
+            ">>> I'm a Human / Hacker / Programmer / philosopher. ",
+            ">>> Exploring Philosophy, Technology, and Strength.",
+            "<span class='heading'>Loading thoughts...</span>",
+            "Philosophy: The quest for understanding existence.",
+            "Technology: Turning ideas into reality.",
+            "Strength: Building resilience, one step at a time.",
+            "<span class='heading'>Welcome to the Digital Space!</span>",
         ];
+
         let line = 0;
         let charIndex = 0;
+        let typingInterval;
 
         function typeEffect() {
             if (line < text.length) {
                 if (charIndex < text[line].length) {
                     const currentLine = text[line];
                     if (currentLine.startsWith("<span")) {
-                        // For headings, add the whole line instantly
                         terminal.innerHTML += currentLine + "<br>";
                         charIndex = currentLine.length;
                     } else {
@@ -142,18 +192,27 @@
                     line++;
                 }
             } else {
-                cursor.style.display = 'none'; // Hide the cursor when done
+                cursor.style.display = 'none';
                 clearInterval(typingInterval);
+                content.classList.remove('hidden');
             }
         }
 
-        // Cursor blink effect
+        function skipTypingEffect() {
+            clearInterval(typingInterval);
+            terminal.innerHTML = text.join('<br>') + "<br>";
+            cursor.style.display = 'none';
+            content.classList.remove('hidden');
+            skipButton.style.display = 'none';
+        }
+
         setInterval(() => {
             cursor.style.visibility = cursor.style.visibility === 'hidden' ? 'visible' : 'hidden';
         }, 500);
 
-        // Start typing effect
-        const typingInterval = setInterval(typeEffect, 100);
+        typingInterval = setInterval(typeEffect, 100);
+
+        skipButton.addEventListener('click', skipTypingEffect);
     </script>
 </body>
 </html>
