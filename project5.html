@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII Art Generator Tool - Code</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #121212, #232323);
+            color: #f1f1f1;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            color: #f0f0f0;
+            text-align: center;
+            margin-top: 20px;
+            background: linear-gradient(to right, #82aaff, #ff79c6);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        p, ul {
+            margin: 20px;
+            font-size: 1.1rem;
+            color: #e0e0e0;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        a {
+            color: #82aaff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #ff79c6;
+            text-decoration: underline;
+        }
+        pre {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            color: #c5c5c5;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px;
+        }
+        code {
+            color: #ff79c6;
+        }
+        .section {
+            background: linear-gradient(145deg, #181818, #2c2c2c);
+            padding: 30px;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+        .highlight {
+            color: #f1fa8c;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #181818;
+            color: #757575;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Toggle button styles */
+        .toggle-btn {
+            background-color: #ff79c6;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-btn:hover {
+            background-color: #82aaff;
+        }
+
+        .code-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>ASCII Art Generator Tool</h1>
+
+    <div class="section">
+        <p>This tool generates ASCII art from images, converting each pixel of the image into an ASCII character. The resulting art is displayed directly in the console, allowing you to visualize your image in text form!</p>
+    </div>
+
+    <div class="section">
+        <h2>Why is this Tool Useful?</h2>
+        <p>The <strong>ASCII Art Generator Tool</strong> is useful for creating text-based representations of images, which can be shared easily as text. It's a fun and creative way to convert images into something unique for use in console applications or text-based environments.</p>
+        <ul>
+            <li><strong>Image to ASCII Conversion:</strong> Converts any image into ASCII characters, creating a visual representation without using graphical tools.</li>
+            <li><strong>Customizable:</strong> You can adjust the scale and characters used for conversion, offering flexibility in how the output looks.</li>
+            <li><strong>Creative Applications:</strong> Can be used in various creative projects, like text-based games, digital art, and even social media posts.</li>
+            <li><strong>Quick and Easy:</strong> With a simple function call, you can generate ASCII art from any image.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>How to Use the Tool</h2>
+        <p>To use this tool, follow these steps:</p>
+        <ol>
+            <li><strong>Choose an Image:</strong> Select an image that you want to convert into ASCII art.</li>
+            <li><strong>Adjust Scale:</strong> Set the scale to determine how detailed the output will be. A smaller scale results in less detail, while a larger scale provides more accuracy.</li>
+            <li><strong>Run the Script:</strong> Once you run the script, it will output the ASCII art representation of the image in the console.</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Explanation of the Functions</h2>
+        <p>The code contains two primary functions that drive the ASCII conversion process:</p>
+        <ul>
+            <li><strong>get_str_ascii(intent: int):</strong> This function maps an integer value (the intensity of a pixel) to an ASCII character. The lower the intensity, the more empty characters (e.g., spaces) are used, while higher intensities result in denser characters like "@".</li>
+            <li><strong>get_image(image_path: str, scale: int):</strong> This function opens the image, iterates through the pixels, calculates their intensity, and prints out the corresponding ASCII character for each pixel.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Code for ASCII Art Generator:</h2>
+        <button class="toggle-btn" onclick="toggleCode()">Show Code</button>
+        <div id="code-block" class="code-container">
+            <pre>
+<code>
+from PIL import Image
+
+def get_str_ascii(intent: int) -> str:
+    ascii = [" ", ".", ",", "-", "~", "+", "=", "@"]
+    index = intent // 32
+    return ascii[index]
+
+def get_image(image_path: str, scale: int):
+    img = Image.open(image_path)
+    width, height = img.size
+    
+    for y in range(height):
+        for x in range(width):
+            if y % (scale * 2) == 0 and x % scale == 0:
+                pix = img.getpixel((x, y))
+                
+                if len(pix) == 4:  
+                    intent = sum(pix[:3]) // 3 
+                    if pix[3] == 0: 
+                        intent = 0
+                else: 
+                    intent = sum(pix) // 3  
+
+                print(get_str_ascii(intent), end="")
+        
+        if y % (scale * 2) == 0:
+            print()  
+
+if __name__ == "__main__":
+    get_image("myth.jpg", 4)
+</code>
+            </pre>
+        </div>
+    </div>
+
+    <footer>
+        <p>Created by <span class="highlight">Your Name</span> | 2025</p>
+    </footer>
+
+    <script>
+        function toggleCode() {
+            var codeBlock = document.getElementById("code-block");
+            var button = document.querySelector(".toggle-btn");
+
+            if (codeBlock.style.display === "none") {
+                codeBlock.style.display = "block";
+                button.textContent = "Hide Code";
+            } else {
+                codeBlock.style.display = "none";
+                button.textContent = "Show Code";
+            }
+        }
+    </script>
+</body>
+</html>

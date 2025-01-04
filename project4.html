@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Functions Tool - Code</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #121212, #232323);
+            color: #f1f1f1;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            color: #f0f0f0;
+            text-align: center;
+            margin-top: 20px;
+            background: linear-gradient(to right, #82aaff, #ff79c6);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        p, ul {
+            margin: 20px;
+            font-size: 1.1rem;
+            color: #e0e0e0;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        a {
+            color: #82aaff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #ff79c6;
+            text-decoration: underline;
+        }
+        pre {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            color: #c5c5c5;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px;
+        }
+        code {
+            color: #ff79c6;
+        }
+        .section {
+            background: linear-gradient(145deg, #181818, #2c2c2c);
+            padding: 30px;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+        .highlight {
+            color: #f1fa8c;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #181818;
+            color: #757575;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Toggle button styles */
+        .toggle-btn {
+            background-color: #ff79c6;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-btn:hover {
+            background-color: #82aaff;
+        }
+
+        .code-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>String Functions Tool</h1>
+
+    <div class="section">
+        <p>This tool provides several string manipulation functions that allow you to perform basic string operations like capitalization, counting occurrences, and much more!</p>
+    </div>
+
+    <div class="section">
+        <h2>Why is this Tool Useful?</h2>
+        <p>The <strong>String Functions Tool</strong> is useful because it gives you the ability to manipulate strings in various ways, whether it's converting cases, checking for characters, replacing substrings, or counting occurrences. You can easily adapt and modify the functions for specific use cases in any Python program. Here's why it's valuable:</p>
+        <ul>
+            <li><strong>Flexible String Operations:</strong> Perform various string manipulations like counting characters, capitalizing, and more.</li>
+            <li><strong>Educational:</strong> Ideal for learning how to implement common string functions manually in Python.</li>
+            <li><strong>Reusability:</strong> Each function is modular and can be reused across different projects, making your code cleaner and more maintainable.</li>
+            <li><strong>Ease of Use:</strong> Just input a string, and the tool will handle the processing for you.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>How to Use the Tool</h2>
+        <p>Using this string functions tool is straightforward. Simply follow these steps:</p>
+        <ol>
+            <li><strong>Choose a Function:</strong> Pick the function you need, such as counting occurrences, replacing characters, or checking if the string is alphanumeric.</li>
+            <li><strong>Provide a String:</strong> Input the string on which you want the operation to be performed.</li>
+            <li><strong>Run the Function:</strong> The function will output the result based on the string you provided, whether it's the capitalized version or the count of a specific character.</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Explanation of the Functions</h2>
+        <p>Below are the key functions provided by this tool and how they work:</p>
+        <ul>
+            <li><strong>length(string):</strong> Returns the length of the given string.</li>
+            <li><strong>Capital(string):</strong> Capitalizes the first letter of the string while leaving the rest of the string unchanged.</li>
+            <li><strong>countocc(string, char):</strong> Counts the number of occurrences of a specific character in the given string.</li>
+            <li><strong>findtheindex(string, char):</strong> Returns the index of the first occurrence of a character in the string.</li>
+            <li><strong>Isalpha(string):</strong> Checks if the string contains only alphabetic characters.</li>
+            <li><strong>Isnumeric(string):</strong> Checks if the string contains only numeric characters.</li>
+            <li><strong>Upper(string):</strong> Converts all alphabetic characters in the string to uppercase.</li>
+            <li><strong>Lower(string):</strong> Converts all alphabetic characters in the string to lowercase.</li>
+            <li><strong>isUpper(string):</strong> Checks if all characters in the string are uppercase.</li>
+            <li><strong>isLower(string):</strong> Checks if all characters in the string are lowercase.</li>
+            <li><strong>StartingWith(string, chr):</strong> Checks if the string starts with the specified character.</li>
+            <li><strong>EndingWith(string, chr):</strong> Checks if the string ends with the specified character.</li>
+            <li><strong>replaceing(string, old, new):</strong> Replaces all occurrences of a specified substring (old) with a new one.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Code for String Functions:</h2>
+        <button class="toggle-btn" onclick="toggleCode()">Show Code</button>
+        <div id="code-block" class="code-container">
+            <pre>
+<code>
+#len
+def length(string):
+    c=0
+    for i in string:
+        c+=1
+    return c
+
+#capitalize
+def Capital(string):
+    s=''
+    a=string[0]
+    ordinal=ord(a)
+    letter=ordinal-97
+    capletter=chr(65+letter)
+    s+=capletter
+    for i in range(1,length(string)):
+        s+=string[i]
+    return s
+
+# occurence count
+def countocc(string,char):
+    c=0
+    for i in string:
+        if i==char:
+            c+=1
+    return c
+
+# find
+def findtheindex(string,char):
+     c=0
+     for i in range(length(string)):
+         if string[i]==char:
+             c=i
+             break
+         else:
+             c=-1
+     return c
+
+#  isalpha
+def Isalpha(string):
+    r=True
+    for i in string:
+        if i in "1234567890!@#$%^&*()_+=-[]{}'<>?/,.~`|'\'" or i in " ":
+            r=False
+        else:
+            r="not a character"
+    return r
+
+# isnum
+def Isnumeric(string):
+     r=True
+     for i in string:
+         if i.lower() in "abcdefghijklmnopqrstuvwxyz!@#$%^&*()_+=-[]{}'<>?/,.~`|'\'" or i in " ":
+             r=False
+         else:
+             r= "Not a character"
+     return r          
+
+#upper
+def Upper(string):
+   s=''
+   for i in string:
+        if i.lower() and i!=" " :
+            if ord(i)>=97:
+                letter=ord(i)-97
+                cap=chr(letter+65)
+                s+=cap
+            else:
+                s+=i
+        elif i==" ":
+            s+=" "
+   return s      
+
+#lower
+def Lower(string):
+   s=''
+   for i in string:
+        if Upper(i) and i!=" " :
+            if ord(i)>=65 and ord(i)<97:
+                letter=ord(i)-65
+                cap=chr(letter+97)
+                s+=cap
+            else:
+                s+=i
+        elif i==" ":
+            s+=" "
+   return s  
+
+# is Uper  
+def isUpper(string):
+    r=False
+    for i in string:
+        if ord(i)>64 and ord(i)<97:
+            r=True
+        else:
+            r=False
+    return r
+
+def isLower(string):
+    r=False
+    for i in string:
+        if   ord(i)>96 and ord(i)<123:
+            r=True
+        else:
+            r=False
+    return r
+
+# startswith
+def StartingWith(string,chr):
+    if string[0]==chr:
+        r=True
+    else:
+        r=False
+    return r
+
+# endswith
+def EndingWith(string,chr):
+    if string[-1]==chr:
+        r=True
+    else:
+        r=False
+    return r
+
+# replace
+def replaceing(string,old,new):
+    s=''
+    for i in range(len(string)):
+        if string[i]==old:
+            s+=new
+        else:
+            s+=string[i]
+    return s
+</code>
+            </pre>
+        </div>
+    </div>
+
+    <footer>
+        <p>Created by <span class="highlight">vinitmalik01</span> </p>
+    </footer>
+
+    <script>
+        function toggleCode() {
+            var codeBlock = document.getElementById("code-block");
+            var button = document.querySelector(".toggle-btn");
+
+            if (codeBlock.style.display === "none") {
+                codeBlock.style.display = "block";
+                button.textContent = "Hide Code";
+            } else {
+                codeBlock.style.display = "none";
+                button.textContent = "Show Code";
+            }
+        }
+    </script>
+</body>
+</html>

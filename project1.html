@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multifunctional Program in Python</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #121212, #232323);
+            color: #f1f1f1;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            color: #f0f0f0;
+            text-align: center;
+            margin-top: 20px;
+            background: linear-gradient(to right, #82aaff, #ff79c6);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        p, ul {
+            margin: 20px;
+            font-size: 1.1rem;
+            color: #e0e0e0;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        a {
+            color: #82aaff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #ff79c6;
+            text-decoration: underline;
+        }
+        pre {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            color: #c5c5c5;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px;
+        }
+        code {
+            color: #ff79c6;
+        }
+        .section {
+            background: linear-gradient(145deg, #181818, #2c2c2c);
+            padding: 30px;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+        .highlight {
+            color: #f1fa8c;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #181818;
+            color: #757575;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Toggle button styles */
+        .toggle-btn {
+            background-color: #ff79c6;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-btn:hover {
+            background-color: #82aaff;
+        }
+
+        .code-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Multifunctional Python Program for File and MySQL Database Management</h1>
+    
+    <div class="section">
+        <p>This Python program is designed to provide a range of file handling and database management functionalities. It allows you to work with different file formats (binary, CSV, text) and perform operations on MySQL databases, all from a single command-line interface.</p>
+    </div>
+
+    <div class="section">
+        <h2>How It Works:</h2>
+        <p>The program presents a simple menu for different tasks. Based on your input, you can:</p>
+        <ul>
+            <li><strong>Binary File Handling:</strong> Work with binary files, performing actions like reading, writing, updating, and appending data.</li>
+            <li><strong>CSV File Handling:</strong> Read, write, and update CSV files, including searching and modifying data.</li>
+            <li><strong>Text File Handling:</strong> Perform similar tasks for text files, such as reading, writing, and updating content.</li>
+            <li><strong>MySQL Database Operations:</strong> Connect to a MySQL database and perform various SQL operations like inserting, updating, and deleting data.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Steps to Use the Program:</h2>
+        <ol>
+            <li>Choose a file format or MySQL to manage data.</li>
+            <li>Based on your choice, the program will prompt you with the available options (e.g., read, write, append, search, update).</li>
+            <li>Follow the on-screen instructions to execute the operation. For database operations, you will need to provide database connection details.</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Code Snippet:</h2>
+        <button class="toggle-btn" onclick="toggleCode()">Show Code</button>
+        <div id="code-block" class="code-container">
+            <pre>
+<code>
+    import mysql.connector
+    import pickle
+    import csv
+    
+    def main():
+        print("WELCOME TO THIS MULTIFUNCTIONALITY PROGRAM WHICH SERVES ")
+        print("FILE HANDLING OF BINARY, CSV, TXT")
+        print("THIS PROGRAM ALSO PROVIDES FUNCTIONALITY TO YOU TO BE ABLE TO GIVE NORMAL COMMANDS AND INTERPRET THEM AND PERFORM FUNCTIONS IN DATABASE")
+        print("ENTER WHAT YOU WANT TO DO")
+        
+        while True:
+            choice = input("Enter your choice (binary/csv/txt/mysql/exit): ").lower()
+            if "binary" in choice:
+                binaryfilehandling()
+            elif "csv" in choice:
+                csvfilehandling()
+            elif "txt" in choice:
+                txtfilehandling()
+            elif "mysql" in choice:
+                mysqlconnection()
+            elif "exit" in choice:
+                print("EXITING PROGRAM.")
+                break
+            else:
+                print("Invalid choice. Please try again.")
+    
+    def askfilename():
+        file = input("Enter file name: ")
+        return file
+    
+    def askdata():
+        data = input("Enter the data you want to write: ")
+        return data
+    
+    def binaryfilehandling():
+        file = askfilename()
+        datan = []
+        choice = input("What to do? (read/write/search/update/Append more data): ").lower()
+        
+        if "read" in choice:
+            try:
+                with open(file, "rb") as f:
+                    print("GIVING FILE'S DATA")
+                    print('-'*20)
+                    while True:
+                        try:
+                            data = pickle.load(f)
+                            print(data)
+                        except EOFError:
+                            print('-'*20)
+                            print("Successfully printed data.")
+                            break
+            except FileNotFoundError:
+                print("File not found.")
+            except Exception as e:
+                print(f"An error occurred: {e}")
+    
+        elif "write" in choice:
+            with open(file, "ab") as f:
+                while True:
+                    data = askdata()
+                    pickle.dump(data, f)
+                    ask = input("More data (Y/N)? ").lower()
+                    if "n" in ask:
+                        break
+        elif "Append more data".lower() in choice:
+            with open(file,"ab")as f:
+                while True:
+                    data = askdata()
+                    pickle.dump(data,f)
+                    ask = input("More data (Y/N)? ").lower()
+                    if "n" in ask:
+                        break
+    
+        elif "search" in choice or "update" in choice:
+            try:
+                with open(file, "rb") as f:
+                    word = input("Enter the word to search: ")
+                    while True:
+                        try:
+                            dat = pickle.load(f)
+                            datan.append(dat)
+                        except EOFError:
+                            break
+                    for i in datan:
+                        if word in i:
+                            print(f"Found {word} in {file}")
+                            new_word = input("Enter new data to update: ")
+                            index = datan.index(i)
+                            datan[index] = new_word
+                with open(file, "wb") as f:
+                    for i in datan:
+                        pickle.dump(i, f)
+                    print(f"Updated {word} to {new_word}")
+            except FileNotFoundError:
+                print("File not found.")
+            except Exception as e:
+                print(f"An error occurred: {e}")
+    
+    def csvfilehandling():
+        file = askfilename()
+        choice = input("What to do? (read/write/search/update/Append more data): ").lower()
+    
+        if "read" in choice:
+            try:
+                with open(file, "r") as f:
+                    reader = csv.reader(f)
+                    print("GIVING FILE'S DATA")
+                    print('-'*20)
+                    for row in reader:
+                        print(row)
+                    print('-'*20)
+                    print("Successfully printed data.")
+            except FileNotFoundError:
+                print("File not found.")
+            except Exception as e:
+                print(f"An error occurred: {e}")
+    
+        elif "write" in choice:
+            with open(file, "w", newline='') as f:
+                writer = csv.writer(f)
+                header = input("Enter header (comma-separated): ").split(',')
+                writer.writerow(header)
+                while True:
+                    data = askdata().split(',')
+                    writer.writerow(data)
+                    ask = input("More data (Y/N)? ").lower()
+                    if "n" in ask:
+                        break
+    
+        elif "search" in choice or "update" in choice:
+            datan = []
+            try:
+                with open(file, "r") as f:
+                    word = input("Enter the word to search: ")
+                    reader = csv.reader(f)
+                    for row in reader:
+                        datan.append(row)
+                    for i in datan:
+                        if word in i:
+                            print(f"Found {word} in {file}")
+                            new_word = input("Enter new data to update: ")
+                            index = i.index(word)
+                            i[index] = new_word
+                with open(file, "w", newline='') as f:
+                    writer = csv.writer(f)
+                    writer.writerows(datan)
+                print("Updated successfully.")
+            except FileNotFoundError:
+                print("File not found.")
+            except Exception as e:
+                print(f"An error occurred: {e}")
+        elif "Append more data".lower() in choice:
+            with open(file,"a")as f:
+                writer = csv.writer(f)
+                while True:
+                    data = askdata().split(',')
+                    writer.writerow(data)
+                    ask = input("More data (Y/N)? ").lower()
+                    if "n" in ask:
+                        break
+    
+    def txtfilehandling():
+        file = askfilename()
+        choice = input("What to do? (read/write/search/update/Append more data): ").lower()
+    
+        if "read" in choice:
+            try:
+                with open(file, "r") as f:
+                    
+                    print("GIVING FILE'S DATA")
+                    print('-'*20)
+                    lines = f.readlines()
+                    for line in lines:
+                        print(line, end="")
+                    print('-'*20)
+                    print("Successfully printed data.")
+            except FileNotFoundError:
+                print("File not found.")
+            except Exception as e:
+                print(f"An error occurred: {e}")
+    
+        elif "write" in choice:
+            with open(file, "a") as f:
+                while True:
+                    data = askdata()
+                    f.write(data + '\n')
+                    ask = input("More data (Y/N)? ").lower()
+                    if "n".lower() in ask:
+                        break
+    
+        elif "search" in choice or "update" in choice:
+            datan = []
+            try:
+                with open(file, "r") as f:
+                    word = input("Enter the word to search: ")
+                    lines = f.readlines()
+                    for line in lines:
+                        datan.append(line.strip())
+                    for i in datan:
+                        if word in i:
+                            print(f"Found {word} in {file}")
+                            new_word = input("Enter new data to update: ")
+                            index = datan.index(i)
+                            datan[index] = new_word
+                with open(file, "w") as f:
+                    for line in datan:
+                        f.write(line + '\n')
+                print("Updated successfully.")
+            except FileNotFoundError:
+                print("File not found.")
+            except Exception as e:
+                print(f"An error occurred: {e}")
+        elif "Append more data".lower() in choice:
+            with open(file,"a")as f:
+                while True:
+    
+                    data = askdata()
+                    f.write(data+'\n')
+                    ask = input("More data (Y/N)? ").lower()
+                    if "N".lower() in ask:
+                        break
+    
+    
+    def mysqlconnection():
+        try:
+            # Get MySQL connection details from the user
+            host = input("Enter host to connect to: ")
+            userr = input("Enter user name: ")
+            your_password = input("Enter password: ")
+            your_database = input("Enter database name to connect to: ")
+    
+            # Establish the connection to MySQL database
+            connection = mysql.connector.connect(
+                host=host,
+                user=userr,
+                password=your_password,
+                database=your_database
+            )
+            cursor = connection.cursor()
+            print("Connected to MySQL database.")
+    
+            # Show all tables in the selected database
+            cursor.execute("SHOW TABLES")
+            tables = cursor.fetchall()
+            print("These are the tables present in", your_database)
+            print('-'*15)
+            for table in tables:
+                print(table[0])
+            print('-'*15)
+    
+            # Get table name from user
+            table = input("Choose one table: ")
+    
+            # Check if table exists
+            cursor.execute("SHOW TABLES LIKE %s", (table,))
+            if cursor.fetchone() is None:
+                print(f"Table {table} does not exist.")
+                return
+    
+            # Show all records in the selected table
+            cursor.execute(f"SELECT * FROM {table}")
+            records = cursor.fetchall()
+            print("These records are present in the table:")
+            print('-'*15)
+            for record in records:
+                print(record)
+            print('-'*15)
+    
+            # Show table structure
+            cursor.execute(f"DESC {table}")
+            structure = cursor.fetchall()
+            print("Following structure is followed in the table:")
+            print('-'*15)
+            for column in structure:
+                print(column)
+            print('-'*15)
+    
+            # Menu for table operations
+            while True:
+                print("What to do in the table now?")
+                choice = input("UPDATE / INSERT / DELETE / ADD COLUMN / REMOVE COLUMN / DROP TABLE / EXIT: ").lower()
+    
+                if "update" in choice:
+                    # Update operation
+                    column = input("Which column to update? ")
+                    condition = input("Extra condition? (y/n): ").lower()
+                    internal_choice = input("What operation? (increase, decrease, multiply, divide, set default): ").lower()
+    
+                    if "increase" in internal_choice:
+                        increase = input("Increase by? ")
+                        query = f"UPDATE {table} SET {column} = {column} + %s"
+                        cursor.execute(query, (increase,))
+                        connection.commit()
+                        print("Column updated.")
+    
+                    elif "decrease" in internal_choice:
+                        decrease = input("Decrease by? ")
+                        query = f"UPDATE {table} SET {column} = {column} - %s"
+                        cursor.execute(query, (decrease,))
+                        connection.commit()
+                        print("Column updated.")
+    
+                    elif "multiply" in internal_choice:
+                        multiply = input("Multiply by? ")
+                        query = f"UPDATE {table} SET {column} = {column} * %s"
+                        cursor.execute(query, (multiply,))
+                        connection.commit()
+                        print("Column updated.")
+    
+                    elif "divide" in internal_choice:
+                        divide = input("Divide by? ")
+                        query = f"UPDATE {table} SET {column} = {column} / %s"
+                        cursor.execute(query, (divide,))
+                        connection.commit()
+                        print("Column updated.")
+    
+                    elif "set" in internal_choice:
+                        value = input("Set value to: ")
+                        query = f"UPDATE {table} SET {column} = %s"
+                        cursor.execute(query, (value,))
+                        connection.commit()
+                        print("Column updated.")
+    
+                    # Conditional update
+                    if "y" in condition:
+                        cond = input("Provide condition after WHERE clause: ")
+                        query = f"UPDATE {table} SET {column} = %s WHERE {cond}"
+                        cursor.execute(query, (value,))
+                        connection.commit()
+                        print("Column updated with condition.")
+    
+                elif "insert" in choice:
+                    # Insert operation
+                    d = {}
+                    while True:
+                        col = input("Enter column name: ")
+                        val = input("Enter value: ")
+                        d[col] = val
+                        ask = input("More data (Y/N)? ").lower()
+                        if "n" in ask:
+                            break
+                    columns = list(d.keys())
+                    values = list(d.values())
+                    placeholders = ', '.join(['%s'] * len(values))
+                    query = f"INSERT INTO {table} ({', '.join(columns)}) VALUES ({placeholders})"
+                    cursor.execute(query, values)
+                    connection.commit()
+                    print("Inserted record successfully.")
+    
+                elif "delete" in choice:
+                    # Delete operation
+                    cnd = input("Enter condition after WHERE clause: ")
+                    query = f"DELETE FROM {table} WHERE {cnd}"
+                    cursor.execute(query)
+                    connection.commit()
+                    print("Deleted record successfully.")
+    
+                elif "alter" in choice:
+                    # Alter table operation (add/drop column)
+                    action = input("Modify / Add / Drop the column? ").lower()
+                    if action == "add":
+                        column = input("Enter column name to add: ")
+                        datatype = input("Enter datatype (e.g., INT, VARCHAR): ")
+                        query = f"ALTER TABLE {table} ADD COLUMN {column} {datatype}"
+                        cursor.execute(query)
+                        connection.commit()
+                        print(f"Column {column} added.")
+                    elif action == "drop":
+                        column = input("Enter column name to drop: ")
+                        query = f"ALTER TABLE {table} DROP COLUMN {column}"
+                        cursor.execute(query)
+                        connection.commit()
+                        print(f"Column {column} dropped.")
+    
+                elif "drop" in choice:
+                    # Drop table operation
+                    query = f"DROP TABLE {table}"
+                    cursor.execute(query)
+                    connection.commit()
+                    print(f"Table {table} dropped.")
+    
+                elif "exit" in choice:
+                    print("Exiting Program....")
+                    cursor.close()
+                    connection.close()
+                    break
+    
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+    
+    if __name__ == "__main__":
+        main()
+</code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Why Use This Program?</h2>
+        <p>This multifunctional program is useful for individuals and developers who regularly work with files and databases. Here are a few reasons to use it:</p>
+        <ul>
+            <li><strong>Easy File Handling:</strong> Supports common file formats (binary, CSV, text) for both reading and writing.</li>
+            <li><strong>Efficient Database Management:</strong> Allows direct interaction with MySQL databases for various operations such as inserting and updating records.</li>
+            <li><strong>Extensibility:</strong> Can be extended to support more operations or handle different file types and database systems.</li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>Created by <span class="highlight">vinitmalik01</span> </p>
+    </footer>
+
+    <script>
+        function toggleCode() {
+            var codeBlock = document.getElementById("code-block");
+            var button = document.querySelector(".toggle-btn");
+
+            if (codeBlock.style.display === "none") {
+                codeBlock.style.display = "block";
+                button.textContent = "Hide Code";
+            } else {
+                codeBlock.style.display = "none";
+                button.textContent = "Show Code";
+            }
+        }
+    </script>
+</body>
+</html>

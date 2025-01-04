@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Assistant Tool - Code</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #121212, #232323);
+            color: #f1f1f1;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            color: #f0f0f0;
+            text-align: center;
+            margin-top: 20px;
+            background: linear-gradient(to right, #82aaff, #ff79c6);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        p, ul {
+            margin: 20px;
+            font-size: 1.1rem;
+            color: #e0e0e0;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        a {
+            color: #82aaff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #ff79c6;
+            text-decoration: underline;
+        }
+        pre {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            color: #c5c5c5;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px;
+        }
+        code {
+            color: #ff79c6;
+        }
+        .section {
+            background: linear-gradient(145deg, #181818, #2c2c2c);
+            padding: 30px;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+        .highlight {
+            color: #f1fa8c;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #181818;
+            color: #757575;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Toggle button styles */
+        .toggle-btn {
+            background-color: #ff79c6;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-btn:hover {
+            background-color: #82aaff;
+        }
+
+        .code-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Voice Assistant Tool</h1>
+
+    <div class="section">
+        <p>This tool is an interactive voice assistant capable of performing various tasks such as searching Wikipedia, getting weather updates, playing music, and much more, all through voice commands.</p>
+    </div>
+
+    <div class="section">
+        <h2>Why is this Tool Useful?</h2>
+        <p>The <strong>Voice Assistant Tool</strong> is designed to assist you with tasks efficiently using voice commands, helping to automate actions without manual input. Here's why it's beneficial:</p>
+        <ul>
+            <li><strong>Hands-free Control:</strong> You can control your computer without needing to type commands, making it especially useful for multitasking or when your hands are occupied.</li>
+            <li><strong>Smart Interactions:</strong> The tool integrates with external APIs like weather services and news sources, offering live information such as weather updates and the latest news.</li>
+            <li><strong>Voice-driven Search:</strong> It allows you to quickly search Wikipedia and YouTube without needing to open a browser or type.</li>
+            <li><strong>Entertainment:</strong> The tool can play music from your local playlist or search for content online, providing a seamless entertainment experience.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>How to Use the Tool</h2>
+        <p>Using this voice assistant tool is simple. Just follow these steps:</p>
+        <ol>
+            <li><strong>Start the Tool:</strong> Run the Python script and let the voice assistant wish you based on the time of day.</li>
+            <li><strong>Give a Command:</strong> Speak commands clearly into your microphone. The assistant can respond to various requests like:
+                <ul>
+                    <li>Searching Wikipedia</li>
+                    <li>Getting weather updates</li>
+                    <li>Opening websites like YouTube, Google, or Discord</li>
+                    <li>Playing random songs from your playlist</li>
+                    <li>Fetching the latest news</li>
+                    <li>And more!</li>
+                </ul>
+            </li>
+            <li><strong>Exit the Assistant:</strong> Say "bye" to exit the tool and end the interaction.</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Explanation of the Tool</h2>
+        <p>The <strong>Voice Assistant Tool</strong> is built using Python, leveraging various libraries and APIs:</p>
+        <ul>
+            <li><strong>pyttsx3:</strong> For text-to-speech conversion, allowing the assistant to speak to you.</li>
+            <li><strong>speech_recognition:</strong> Used to capture and recognize voice commands, enabling the assistant to interpret your input.</li>
+            <li><strong>wikipedia:</strong> Enables the assistant to fetch information from Wikipedia and read it out to you.</li>
+            <li><strong>requests:</strong> Fetches real-time data such as weather reports and news articles using APIs.</li>
+            <li><strong>webbrowser:</strong> Opens URLs in a browser based on your requests (e.g., opening YouTube, Google, or Discord).</li>
+            <li><strong>random:</strong> Used to play a random song from your local playlist to add some fun to the experience.</li>
+        </ul>
+        <p>The assistant uses a combination of voice recognition and text-to-speech output to interact with you in a conversational manner, making the tool a smart and engaging way to control your computer.</p>
+    </div>
+
+    <div class="section">
+        <h2>Code for the Voice Assistant:</h2>
+        <button class="toggle-btn" onclick="toggleCode()">Show Code</button>
+        <div id="code-block" class="code-container">
+            <pre>
+<code>
+import pyttsx3
+import datetime
+import os
+import speech_recognition as sr
+import wikipedia
+import random
+import requests
+import webbrowser
+
+engine = pyttsx3.init('sapi5')
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[0].id)
+
+def speak(audio):
+    engine.say(audio)
+    engine.runAndWait()
+
+def wish():
+    hour = int(datetime.datetime.now().hour)
+    if hour < 12:
+        speak("Good Morning Hacker!")
+    elif hour > 11 and hour < 17:
+        speak("Good Afternoon Hacker!")
+    else:
+        speak("Good Evening Hacker!")
+    speak("I am your Friend ....so How may I help you?")
+
+def takecommand():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening.... ")
+        r.pause_threshold = 1
+        audio = r.listen(source)
+        try:
+            print("Recognizing... ")
+            query = r.recognize_google(audio, language="en-in")
+            print(f"As you said: {query}")
+            speak("Working on it, Bro!")
+        except Exception as e:
+            print(e)
+            print("-_- An error occurred. Please try again.")
+            return "None"
+        return query
+
+def get_weather(state):
+    api_key = "key"  # Replace "YOUR_API_KEY" with your actual API key
+    base_url = "http://api.weatherapi.com/v1/current.json"
+    params = {
+        "key": api_key,
+        "q": state
+    }
+    response = requests.get(base_url, params=params)
+    data = response.json()
+    if 'error' in data:
+        speak("Sorry, I couldn't fetch the weather information at the moment.")
+    else:
+        current = data['current']
+        temperature = current['temp_c']
+        condition = current['condition']['text']
+        speak(f"The current temperature in {state} is {temperature} degrees Celsius with {condition}.")
+        print(f"The current temperature in {state} is {temperature} degrees Celsius with {condition}.")
+
+def get_news(category):
+    api_key = "key"  # Replace "YOUR_API_KEY" with your actual API key
+    base_url = "https://newsapi.org/v2/top-headlines"
+    params = {
+        "apiKey": api_key,
+        "category": category
+    }
+    response = requests.get(base_url, params=params)
+    data = response.json()
+    articles = data.get('articles', [])
+    if not articles:
+        speak("Sorry, I couldn't fetch the news at the moment.")
+    else:
+        news_list = []
+        for article in articles:
+            title = article['title']
+            news_list.append(title)
+        speak(news_list)
+
+if __name__ == "__main__":
+    wish()
+    while True:
+        query = takecommand().lower()
+        if 'wikipedia' in query:
+            speak("Searching Wikipedia....")
+            query = query.replace('wikipedia', '')
+            results = wikipedia.summary(query, sentences=3)
+            speak("According to Wikipedia")
+            print("Here's what I found on Wikipedia Results: ", results)
+            speak(results)
+        elif 'open youtube' in query:
+            speak('Opening YouTube')
+            speak("What do you want to search?")
+            n = input()
+            speak('Okay, opening now!')
+            webbrowser.open('https://www.youtube.com/results?search_query=' + n)
+        elif 'bye' in query:
+            speak("I am now logging off. Nice to work with you. Hope you will come again because I'm your only friend.")
+            break
+        elif 'open google' in query:
+            speak('Opening Google')
+            webbrowser.open('google.com')
+        elif 'open discord' in query:
+            speak('Opening Discord')
+            webbrowser.open('discord.com')
+        elif 'play music' in query:
+            music = "C:\\Users\\HP\\Desktop\\songs"
+            song = os.listdir(music)
+            n = random.randint(0, len(song) - 1)
+            speak('Playing random song from your playlist')
+            os.startfile(os.path.join(music, song[n]))
+        elif 'time' in query:
+            strtime = datetime.datetime.now().strftime("%H:%M:%S")
+            speak(f"Bruhh! The time is {strtime}")
+        elif 'weather' in query:
+            speak('Please speak the state')
+            n = takecommand().lower()
+            get_weather(n)
+        elif 'news' in query:
+            speak('What is the topic?')
+            m = takecommand().lower()
+            get_news(m)
+
+</code>
+            </pre>
+        </div>
+    </div>
+
+    <footer>
+        <p>Created by <span class="highlight">vinitmalik01</span> </p>
+    </footer>
+
+    <script>
+        function toggleCode() {
+            var codeBlock = document.getElementById("code-block");
+            var button = document.querySelector(".toggle-btn");
+
+            if (codeBlock.style.display === "none") {
+                codeBlock.style.display = "block";
+                button.textContent = "Hide Code";
+            } else {
+                codeBlock.style.display = "none";
+                button.textContent = "Show Code";
+            }
+        }
+    </script>
+</body>
+</html>

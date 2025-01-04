@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Port Scanner Tool - Code</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #121212, #232323);
+            color: #f1f1f1;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            color: #f0f0f0;
+            text-align: center;
+            margin-top: 20px;
+            background: linear-gradient(to right, #82aaff, #ff79c6);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        p, ul {
+            margin: 20px;
+            font-size: 1.1rem;
+            color: #e0e0e0;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        a {
+            color: #82aaff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #ff79c6;
+            text-decoration: underline;
+        }
+        pre {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            color: #c5c5c5;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px;
+        }
+        code {
+            color: #ff79c6;
+        }
+        .section {
+            background: linear-gradient(145deg, #181818, #2c2c2c);
+            padding: 30px;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+        .highlight {
+            color: #f1fa8c;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #181818;
+            color: #757575;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Toggle button styles */
+        .toggle-btn {
+            background-color: #ff79c6;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-btn:hover {
+            background-color: #82aaff;
+        }
+
+        .code-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Advanced Port Scanner Tool</h1>
+
+    <div class="section">
+        <p>This tool allows you to scan open ports and detect services on a target IP, providing valuable insights into network vulnerabilities and available services.</p>
+    </div>
+
+    <div class="section">
+        <h2>Why is this Tool Useful?</h2>
+        <p>The <strong>Advanced Port Scanner Tool</strong> is a powerful utility that helps network administrators and security professionals assess the status of ports and services running on a remote machine. Here’s why this tool is indispensable:</p>
+        <ul>
+            <li><strong>Network Security:</strong> It allows you to identify open ports that could be vulnerable to exploits or attacks.</li>
+            <li><strong>Service Detection:</strong> It provides banners for various services (e.g., HTTP, SSH, FTP) running on open ports, which helps to identify the services and their versions.</li>
+            <li><strong>Efficient Port Scanning:</strong> The tool scans multiple ports quickly using threading, enabling fast detection of services across a range of ports.</li>
+            <li><strong>Legal Compliance:</strong> Ensure that the devices or servers you are scanning are within your legal rights to inspect, keeping your network assessments ethical and compliant.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>How to Use the Tool</h2>
+        <p>Using this tool is easy! Follow the steps below to get started:</p>
+        <ol>
+            <li><strong>Choose a Task:</strong> When prompted, choose what you'd like to do:
+                <ul>
+                    <li><strong>Check Host Availability:</strong> Verify if a specific host (IP address) is reachable for further enumeration.</li>
+                    <li><strong>Scan Ports:</strong> Enter a target IP and specify the port range to scan for open ports and services.</li>
+                    <li><strong>Exit:</strong> Exit the tool when you're done.</li>
+                </ul>
+            </li>
+            <li><strong>Enter Target IP:</strong> Input the IP address of the host you wish to check or scan.</li>
+            <li><strong>Specify Port Range:</strong> For scanning ports, provide the start and end ports to scan within a specified range.</li>
+            <li><strong>Review Results:</strong> Once the scan is complete, review the results to see which ports are open and the services they are running.</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Explanation of the Tool</h2>
+        <p>The <strong>Advanced Port Scanner Tool</strong> is built using Python, making it versatile and easy to run on most operating systems. It works in the following way:</p>
+        <ul>
+            <li><strong>Host Discovery:</strong> The tool starts by verifying if the target host is reachable via a simple ping test.</li>
+            <li><strong>Port Scanning:</strong> It scans each port in the specified range using multi-threading to speed up the process. It checks if each port is open and tries to fetch a service banner if available.</li>
+            <li><strong>Service Detection:</strong> For certain ports (like HTTP, SSH, FTP), it attempts to grab a banner to identify the service and its version, which helps in further security assessments.</li>
+            <li><strong>Retries and Timeout Handling:</strong> If a connection to a port fails or times out, the tool retries multiple times (with customizable retries) before reporting the port as closed or unreachable.</li>
+        </ul>
+        <p>Overall, this tool provides a comprehensive way to analyze the open ports and services on a target machine, helping you with network management and security audits.</p>
+    </div>
+
+    <div class="section">
+        <h2>Code for the Advanced Port Scanner:</h2>
+        <button class="toggle-btn" onclick="toggleCode()">Show Code</button>
+        <div id="code-block" class="code-container">
+            <pre>
+<code>
+import subprocess as sp
+import platform
+import socket
+import threading
+import ssl
+import time
+
+def host_discover(ip):
+    system_platform = platform.system().lower()
+
+    if system_platform == "windows":
+        command = ["ping", "-n", "1", ip]
+    else:
+        command = ["ping", "-c", "1", ip]
+
+    try:
+        result = sp.run(command, capture_output=True, text=True)
+        if result.returncode == 0:
+            print(f"Host {ip} is available for further enumeration.")
+            return True
+        else:
+            print(f"Host {ip} is not available.")
+            return False
+    except Exception as e:
+        print(f"Error checking host availability: {e}")
+        return False
+
+def scan_port(target_ip, port, retries=3, timeout=10):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(timeout)
+    
+    attempt = 0
+    while attempt < retries:
+        try:
+            result = sock.connect_ex((target_ip, port))
+
+            if result == 0:
+                print(f"Port {port} is open, attempting to grab banner...")
+
+                if port == 80 or port == 443:
+                    try:
+                        if port == 443:
+                            context = ssl.create_default_context()
+                            sock = context.wrap_socket(sock, server_hostname=target_ip)
+
+                        http_request = f"GET / HTTP/1.1\r\nHost: {target_ip}\r\n\r\n"
+                        sock.sendall(http_request.encode())
+
+                        banner = sock.recv(2048).decode('utf-8', errors='ignore').strip()
+
+                        if banner:
+                            print(f"Port {port} banner: {banner}")
+                        else:
+                            print(f"Port {port} is open, but no banner received.")
+
+                    except socket.timeout:
+                        print(f"Port {port} is open, but timed out while waiting for HTTP banner.")
+                    except ssl.SSLError as ssl_error:
+                        print(f"SSL error on port {port}: {ssl_error}")
+                    except Exception as e:
+                        print(f"Error grabbing HTTP banner from port {port}: {e}")
+
+                elif port == 22:
+                    try:
+                        banner = sock.recv(1024).decode('utf-8', errors='ignore').strip()
+
+                        if banner:
+                            print(f"Port {port} (SSH) banner: {banner}")
+                        else:
+                            print(f"Port {port} is open, but no SSH banner received.")
+
+                    except socket.timeout:
+                        print(f"Port {port} (SSH) is open, but timed out while waiting for banner.")
+                    except Exception as e:
+                        print(f"Error grabbing SSH banner from port {port}: {e}")
+
+                elif port == 20:
+                    try:
+                        banner = sock.recv(1024).decode('utf-8', errors='ignore').strip()
+
+                        if banner:
+                            print(f"Port {port} (FTP) banner: {banner}")
+                        else:
+                            print(f"Port {port} is open, but no FTP banner received.")
+
+                    except socket.timeout:
+                        print(f"Port {port} (FTP) is open, but timed out while waiting for banner.")
+                    except Exception as e:
+                        print(f"Error grabbing FTP banner from port {port}: {e}")
+
+                else:
+                    print(f"Port {port} is open, but no specific banner grab logic implemented for this port.")
+
+                return  # Success, exit the retry loop
+
+            else:
+                print(f"Port {port} is closed or unreachable.")
+                return
+
+        except socket.timeout:
+            print(f"Attempt {attempt + 1} of {retries}: Timeout on port {port}")
+        except Exception as e:
+            print(f"Error with socket connection to {target_ip} on port {port}: {e}")
+        
+        attempt += 1
+        time.sleep(1)  # Wait a bit before retrying
+
+    print(f"Failed to connect to port {port} after {retries} attempts.")
+    sock.close()
+
+def port_scan(target_ip, start_port, end_port):
+    threads = []
+    
+    for port in range(start_port, end_port + 1):
+        thread = threading.Thread(target=scan_port, args=(target_ip, port))
+        threads.append(thread)
+        thread.start()
+
+    for thread in threads:
+        thread.join()
+
+def main():
+    print("=" * 50)
+    print(" " * 10 + "Welcome to the Advanced Port Scanner Tool")
+    print(" " * 5 + "This tool allows you to scan open ports and detect services on a target IP.")
+    print("=" * 50)
+    print(" " * 10 + "Please proceed with caution and ensure you have permission to scan the target.")
+    print("=" * 50)
+    
+    while True:
+        try:
+            choice = input("What would you like to do? (1: Check if host is up, 2: Scan ports, 3: Exit): ")
+            
+            if "1" in choice:
+                ip = input("Enter the IP address to check: ")
+                host_discover(ip)
+            elif "2" in choice:
+                ip = input("Enter the IP address to scan: ")
+                result = host_discover(ip)
+                if result:
+                    start_port = int(input("Enter the start port to scan: "))
+                    end_port = int(input("Enter the end port to scan: "))
+                    print("Port Status  Service")
+                    port_scan(ip, start_port, end_port)
+                else:
+                    print("The host is not reachable.")
+            elif "3" in choice:
+                print("Exiting the tool. Stay safe!")
+                break
+            else:
+                print("Invalid choice, please select a valid option.")
+        except KeyboardInterrupt:
+            print("\nOperation interrupted by user. Exiting the tool.")
+            break
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
+
+if __name__ == "__main__":
+    main()
+</code>
+            </pre>
+        </div>
+    </div>
+
+    <footer>
+        <p>Created by <span class="highlight">vinitmalik01</span></p>
+    </footer>
+
+    <script>
+        function toggleCode() {
+            var codeBlock = document.getElementById("code-block");
+            var button = document.querySelector(".toggle-btn");
+
+            if (codeBlock.style.display === "none") {
+                codeBlock.style.display = "block";
+                button.textContent = "Hide Code";
+            } else {
+                codeBlock.style.display = "none";
+                button.textContent = "Show Code";
+            }
+        }
+    </script>
+</body>
+</html>
