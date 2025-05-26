@@ -285,8 +285,8 @@
         <button onclick="handlePredefined('contact')">CONTACT INFO</button>
         <button onclick="handlePredefined('experience')">What experience does Vinit have?</button>
         <button onclick="handlePredefined('college')">What education does Vinit have?</button>
-        <button onclick="handlePredefined('college')">Has Vinit worked on any projects?</button>
-        <button onclick="handlePredefined('college')">What certifications or achievements does Vinit hold?</button>
+        <button onclick="handlePredefined('projects')">Has Vinit worked on any projects?</button>
+        <button onclick="handlePredefined('certifications')">What certifications or achievements does Vinit hold?</button>
 
       </div>
     </div>
@@ -371,8 +371,8 @@
       else if (msg.includes("contact")) response = "You can reach him via email at vinitmalik264@gmail.com or on X (Twitter) @VinitMalik01.";
       else if (msg.includes("experience")) response = "He interned at NCJIMS, Hisar, where he learned about physical networking, servers, and JavaScript.";
       else if (msg.includes("college")) response = "He completed Class 12th at OPJMS Hisar with top scores in Python and MySQL, and is currently enrolled at Amity University for BCA in Cloud and Security.";
-      else if (msg.includes("college"))response= "Yes! He developed Litrix, a Python CLI tool for learning Linux commands and automating cybersecurity tasks, including MITRE ATT&CK techniques, also https://vinitmalik01.github.io/Technology.html a lot of projects here too.";
-      else if (msg.includes("college"))response= "He earned a TryHackMe certificate, received a letter of appreciation for ethical hacking, and was a school computer science topper.";
+      else if (msg.includes("projects"))response= "Yes! He developed Litrix, a Python CLI tool for learning Linux commands and automating cybersecurity tasks, including MITRE ATT&CK techniques, also https://vinitmalik01.github.io/Technology.html a lot of projects here too.";
+      else if (msg.includes("certifications"))response= "He earned a TryHackMe certificate, received a letter of appreciation for ethical hacking, and was a school computer science topper.";
  
 
       setTimeout(() => appendMessage("bot", response), 600);
