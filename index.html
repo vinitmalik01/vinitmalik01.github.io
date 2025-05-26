@@ -1,218 +1,390 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vinit's Digital Space</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-        body {
-            background-color: #121212;
-            color: #e0e0e0;
-            line-height: 1.8;
-            padding: 0;
-            font-size: 18px;
-        }
-        header {
-            text-align: center;
-            margin-top: 50px;
-            margin-bottom: 40px;
-        }
-        header h1 {
-            color: #ff9e00;
-            font-size: 50px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.6);
-        }
-        header p {
-            font-size: 22px;
-            color: #c9c9c9;
-            font-weight: 300;
-            margin-top: 10px;
-        }
-        .terminal {
-            background: linear-gradient(135deg, #1f2a44, #24293c);
-            color: #66fcf1;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 40px;
-            max-height: 450px;
-            overflow-y: auto;
-            font-family: monospace;
-            font-size: 20px;
-            line-height: 1.6;
-            border: 2px solid #00d2ff;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
-        }
-        .terminal .heading {
-            color: #f4d03f;
-            font-weight: bold;
-        }
-        .hidden {
-            display: none;
-        }
-        .skip-button {
-            background: linear-gradient(135deg, #ff5733, #c04e30);
-            color: #fff;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 20px;
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        .skip-button:hover {
-            background: linear-gradient(135deg, #c04e30, #ff5733);
-            transform: scale(1.1);
-        }
-        .blog-post {
-            background-color: #1c1e2f;
-            margin-bottom: 40px;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
-        }
-        .blog-post h2 {
-            color: #ff9e00;
-            margin-bottom: 15px;
-            font-size: 28px;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-        }
-        .blog-post p {
-            margin-bottom: 20px;
-            color: #d1d1d1;
-        }
-        .blog-post a {
-            color: #00d2ff;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s, transform 0.2s ease;
-        }
-        .blog-post a:hover {
-            color: #ff5733;
-            transform: translateY(-3px);
-        }
-        footer {
-            text-align: center;
-            margin-top: 70px;
-            color: #c9c9c9;
-        }
-        footer a {
-            color: #00d2ff;
-            text-decoration: none;
-        }
-        footer a:hover {
-            color: #ff5733;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vinit's Digital Space</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #00ffae;
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      margin-top: 60px;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 3rem;
+      color: #00ffae;
+      text-shadow: 0 0 10px #00ffae, 0 0 20px #00ffae;
+    }
+
+    header p {
+      color: #fff200;
+      font-size: 1.2rem;
+    }
+
+    .terminal {
+      background: #000000;
+      border: 1px solid #000000;
+      color: #41953f;
+      padding: 20px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1rem;
+      border-radius: 10px;
+      max-width: 90%;
+      margin: 20px auto;
+      box-shadow: 0 0 10px #00ffae50;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .terminal .heading {
+      color: #00fff2;
+      font-weight: bold;
+    }
+
+    .skip-button {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      display: inline-block;
+      width: 60px;
+      padding: 0.5rem 1rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.9rem;
+      color: #000;
+      background-color: #00ffc3;
+      border: 2px solid #00ffc3;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 0 8px #00ffc3, 0 0 16px #00ffc377;
+      z-index: 9999;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background 0.3s ease, transform 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .skip-button:hover,
+    .skip-button:focus {
+      outline: none;
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #006666, #00ffae);
+      box-shadow: 0 0 12px #00ffaecc, 0 0 24px #00ffae99;
+    }
+
+    .skip-button:focus-visible {
+      outline: 2px solid #00ffc3;
+      outline-offset: 2px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .blog-post {
+      background-color: #1a1a1a;
+      margin: 30px auto;
+      max-width: 90%;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #00ffae33;
+    }
+
+    .blog-post h2 {
+      color: #00ffae;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .blog-post p {
+      color: #bbb;
+    }
+
+    .blog-post a {
+      color: #00ffd0;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .blog-post a:hover {
+      color: #ff00aa;
+    }
+
+    footer {
+      text-align: center;
+      margin: 40px 0;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    #chat-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #3734348f;
+      border: 2px solid #ffdd0066;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      text-align: center;
+      font-size: 28px;
+      color: #00ffae;
+      cursor: pointer;
+      z-index: 999;
+      box-shadow: 0 0 15px #00ffae66;
+    }
+
+    #chatbox {
+      display: none;
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 320px;
+      background: rgba(10, 10, 10, 0.9);
+      border: 1px solid #00ffae55;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 0 15px #00ffae33;
+      color: #00ffae;
+      font-family: 'Share Tech Mono', monospace;
+      backdrop-filter: blur(5px);
+    }
+
+    #chatlog {
+      max-height: 200px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+
+    .msg {
+      margin-bottom: 10px;
+    }
+
+    .user {
+      color: #72ff00;
+    }
+
+    .bot {
+      color: #00ffd5;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      background: #0f0f0f;
+      color: #00ffae;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #chat-questions button {
+      background: #222;
+      color: #00ffae;
+      margin-top: 5px;
+      border: 1px solid #00ffae33;
+      text-transform: uppercase;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    #chat-questions button:hover,
+    #chat-questions button:focus {
+      background: #00ffae22;
+      box-shadow: 0 0 8px #00ffae88;
+      outline: none;
+    }
+
+    #chat-questions button:focus-visible {
+      outline: 2px solid #00ffc3;
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 600px) {
+      .terminal, .blog-post {
+        padding: 15px;
+        font-size: 16px;
+      }
+
+      .skip-button {
+        top: 10px;
+        right: 15px;
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+
+      #chatbox {
+        width: 90%;
+        right: 5%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Vinit's Digital Space</h1>
-        <p>A journey through Philosophy, Technology, and Strength</p>
-    </header>
+  <header>
+    <h1>Vinit's Digital Space</h1>
+    <p>Philosophy | Technology | Strength</p>
+  </header>
 
-    <div class="terminal" id="terminal">
-        <span id="cursor">|</span>
+  <div class="terminal" id="terminal">
+    <span id="cursor">|</span>
+  </div>
+
+  <button class="skip-button" id="skipButton" aria-label="Skip terminal typing animation">SKIP</button>
+
+  <div id="content" class="hidden">
+    <div class="blog-post">
+      <h2>Philosophy</h2>
+      <p>Exploring existence, truth, and everything in between.</p>
+      <a href="Philosophy.html">Read More &raquo;</a>
     </div>
 
-    <!-- Skip button -->
-    <button class="skip-button" id="skipButton">Skip</button>
-
-    <div id="content" class="hidden">
-        <div class="blog-post">
-            <h2>Philosophy</h2>
-            <p>Philosophy is the art of asking questions and exploring the infinite. It provides a framework to understand existence, truth, and the meaning of life.</p>
-            <a href="Philosophy.html">Read More &raquo;</a>
-        </div>
-
-        <div class="blog-post">
-            <h2>Technology</h2>
-            <p>Technology bridges dreams with reality—one line of code at a time. It shapes the way we interact, innovate, and think.</p>
-            <a href="Technology.html">Read More &raquo;</a>
-        </div>
-
-        <div class="blog-post">
-            <h2>Gym & Strength</h2>
-            <p>Strength is built not just with weights but with persistence and grit. Every drop of sweat adds to the story of resilience.</p>
-            <a href="gym.html">Read More &raquo;</a>
-        </div>
-
-        <footer>
-            <p>&copy; 2025 vinitmalik01</p>
-        </footer>
+    <div class="blog-post">
+      <h2>Technology</h2>
+      <p>Where dreams meet reality through code.</p>
+      <a href="Technology.html">Read More &raquo;</a>
     </div>
 
-    <script>
-        const terminal = document.getElementById('terminal');
-        const cursor = document.getElementById('cursor');
-        const content = document.getElementById('content');
-        const skipButton = document.getElementById('skipButton');
-        const text = [
-            "<span class='heading'>Initializing  Terminal...</span>",
-            ">>> System Check: [OK]",
-            ">>> I'm a Human / Hacker / Programmer / philosopher. ",
-            ">>> Exploring Philosophy, Technology, and Strength.",
-            "<span class='heading'>Loading thoughts...</span>",
-            "Philosophy: The quest for understanding existence.",
-            "Technology: Turning ideas into reality.",
-            "Strength: Building resilience, one step at a time.",
-            "<span class='heading'>Welcome to the Digital Space!</span>",
-        ];
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
 
-        let line = 0;
-        let charIndex = 0;
-        let typingInterval;
+    <div id="chatbox">
+      <div id="chatlog">
+        <div class="msg bot">Hi! I’m Vinit's assistant. Ask me something about him!</div>
+      </div>
+      <div id="chat-questions">
+        <button onclick="handlePredefined('who are you')">WHO IS VINIT?</button>
+        <button onclick="handlePredefined('what do you do')">WHAT HE DOES?</button>
+        <button onclick="handlePredefined('your goals')">HIS GOALS?</button>
+        <button onclick="handlePredefined('your skills')">HIS SKILLS?</button>
+        <button onclick="handlePredefined('contact')">CONTACT INFO</button>
+        <button onclick="handlePredefined('experience')">What experience does Vinit have?</button>
+        <button onclick="handlePredefined('college')">What education does Vinit have?</button>
+        <button onclick="handlePredefined('college')">Has Vinit worked on any projects?</button>
+        <button onclick="handlePredefined('college')">What certifications or achievements does Vinit hold?</button>
 
-        function typeEffect() {
-            if (line < text.length) {
-                if (charIndex < text[line].length) {
-                    const currentLine = text[line];
-                    if (currentLine.startsWith("<span")) {
-                        terminal.innerHTML += currentLine + "<br>";
-                        charIndex = currentLine.length;
-                    } else {
-                        terminal.innerHTML += text[line].charAt(charIndex);
-                        charIndex++;
-                    }
-                } else {
-                    terminal.innerHTML += "<br>";
-                    charIndex = 0;
-                    line++;
-                }
-            } else {
-                cursor.style.display = 'none';
-                clearInterval(typingInterval);
-                content.classList.remove('hidden');
-            }
+      </div>
+    </div>
+
+    <footer>
+      &copy; 2025 vinitmalik01
+    </footer>
+  </div>
+
+  <script>
+    const terminal = document.getElementById('terminal');
+    const cursor = document.getElementById('cursor');
+    const content = document.getElementById('content');
+    const skipButton = document.getElementById('skipButton');
+    const text = [
+      "<span class='heading'>Initializing terminal...</span>",
+      ">>> Boot sequence: [OK]",
+      ">>> Vinit: Human / Hacker / Thinker",
+      ">>> Domains: Philosophy, Code, Strength",
+      "<span class='heading'>Fetching thoughts...</span>",
+      "Philosophy: Seeking deeper truths.",
+      "Technology: Hacking reality itself.",
+      "Strength: Iron will, built daily.",
+      "<span class='heading'>Access Granted. Welcome.</span>",
+    ];
+
+    let line = 0;
+    let charIndex = 0;
+    let typingInterval;
+
+    function typeEffect() {
+      if (line < text.length) {
+        if (charIndex < text[line].length) {
+          if (text[line].startsWith("<span")) {
+            terminal.innerHTML += text[line] + "<br>";
+            charIndex = text[line].length;
+          } else {
+            terminal.innerHTML += text[line].charAt(charIndex);
+            charIndex++;
+          }
+        } else {
+          terminal.innerHTML += "<br>";
+          charIndex = 0;
+          line++;
         }
+      } else {
+        cursor.style.display = 'none';
+        clearInterval(typingInterval);
+        content.classList.remove('hidden');
+        skipButton.style.display = 'none';
+      }
+    }
 
-        function skipTypingEffect() {
-            clearInterval(typingInterval);
-            terminal.innerHTML = text.join('<br>') + "<br>";
-            cursor.style.display = 'none';
-            content.classList.remove('hidden');
-            skipButton.style.display = 'none';
-        }
+    typingInterval = setInterval(typeEffect, 80);
 
-        setInterval(() => {
-            cursor.style.visibility = cursor.style.visibility === 'hidden' ? 'visible' : 'hidden';
-        }, 500);
+    skipButton.addEventListener('click', () => {
+      clearInterval(typingInterval);
+      terminal.innerHTML = text.join('<br>') + "<br>";
+      cursor.style.display = 'none';
+      content.classList.remove('hidden');
+      skipButton.style.display = 'none';
+    });
 
-        typingInterval = setInterval(typeEffect, 100);
+    setInterval(() => {
+      cursor.style.visibility = cursor.style.visibility === 'hidden' ? 'visible' : 'hidden';
+    }, 500);
 
-        skipButton.addEventListener('click', skipTypingEffect);
-    </script>
+    function toggleChat() {
+      const box = document.getElementById("chatbox");
+      box.style.display = box.style.display === "none" ? "block" : "none";
+    }
+
+    function handlePredefined(question) {
+      appendMessage("user", question);
+      document.getElementById("chat-icon").style.display = "none";
+      let msg = question.toLowerCase();
+      let response = "I'm not sure. Try asking about Vinit.";
+
+      if (msg.includes("who")) response = "Vinit Malik is an aspiring cybersecurity enthusiast currently pursuing a BCA in Cloud and Security, along with certifications like CEH and Security+.";
+      else if (msg.includes("do")) response = "He is preparing for his second internship while gaining hands-on experience in cybersecurity, cloud computing, and ethical hacking.";
+      else if (msg.includes("goal")) response = "His goal is to provide professional penetration testing and cybersecurity services.";
+      else if (msg.includes("skill")) response = "He’s skilled in Linux, networking, Python, SQL, Burp Suite, Nmap, and Wireshark.";
+      else if (msg.includes("contact")) response = "You can reach him via email at vinitmalik264@gmail.com or on X (Twitter) @VinitMalik01.";
+      else if (msg.includes("experience")) response = "He interned at NCJIMS, Hisar, where he learned about physical networking, servers, and JavaScript.";
+      else if (msg.includes("college")) response = "He completed Class 12th at OPJMS Hisar with top scores in Python and MySQL, and is currently enrolled at Amity University for BCA in Cloud and Security.";
+      else if (msg.includes("college"))response= "Yes! He developed Litrix, a Python CLI tool for learning Linux commands and automating cybersecurity tasks, including MITRE ATT&CK techniques, also https://vinitmalik01.github.io/Technology.html a lot of projects here too.";
+      else if (msg.includes("college"))response= "He earned a TryHackMe certificate, received a letter of appreciation for ethical hacking, and was a school computer science topper.";
+ 
+
+      setTimeout(() => appendMessage("bot", response), 600);
+    }
+
+    function appendMessage(from, text) {
+      const log = document.getElementById("chatlog");
+      const msg = document.createElement("div");
+      msg.className = `msg ${from}`;
+      msg.innerHTML = `<strong>${from === 'user' ? 'Q' : '$'}:</strong> ${text}`;
+      log.appendChild(msg);
+      log.scrollTop = log.scrollHeight;
+    }
+  </script>
 </body>
 </html>
